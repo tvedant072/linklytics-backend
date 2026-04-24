@@ -1,0 +1,28 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: linklytics-postgres
+    restart: unless-stopped
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: linklytics
+      POSTGRES_PASSWORD: linklytics
+      POSTGRES_DB: linklytics
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  # Uncomment to run the app in Docker
+  # app:
+  #   build: .
+  #   container_name: linklytics-app
+  #   restart: unless-stopped
+  #   ports:
+  #     - '3000:3000'
+  #   env_file:
+  #     - .env
+  #   depends_on:
+  #     - postgres
+
+volumes:
+  pgdata:
